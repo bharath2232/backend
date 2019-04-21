@@ -3,7 +3,7 @@ const http = require('http');
 const socketio = require('socket.io');
 const path = require('path');
 const bodyParser = require('body-parser');
-const port = 80;
+const port = 40.112.68.244:80;
 const app = express();
 
 const server = http.createServer(app);
