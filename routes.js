@@ -18,7 +18,7 @@ module.exports = (app, io) => {
      * Resumes twitter stream.
      */
     const stream = () => {
-        twitter.stream('statuses/filter', { track: 'RCBvCSK' }, (stream) => {
+        twitter.stream('statuses/filter', { follow: 153031481 }, (stream) => {
             stream.on('data', (tweet) => {
                 console.log('tiwttwr',tweet);
                 sendMessage(tweet);
