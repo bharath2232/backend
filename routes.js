@@ -2,7 +2,7 @@ const Twitter = require('twitter');
 const MongoClient = require('mongodb').MongoClient
 
 let db
-MongoClient.connect('mongodb+srv://bharat:Ravi.9700@pushtoken-dgxqj.azure.mongodb.net/test?retryWrites=true', { useNewUrlParser: true },  (err, database) => {
+new MongoClient.connect('mongodb+srv://bharat:Ravi.9700@pushtoken-dgxqj.azure.mongodb.net/test?retryWrites=true', { useNewUrlParser: true },  (err, database) => {
     db = database.db('push-tokens')
 })
 
