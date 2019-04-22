@@ -1,10 +1,14 @@
 const Twitter = require('twitter');
 const MongoClient = require('mongodb').MongoClient
 
-let db
-new MongoClient.connect('mongodb+srv://bharat:Ravi.9700@pushtoken-dgxqj.azure.mongodb.net/test?retryWrites=true', { useNewUrlParser: true },  (err, database) => {
-    db = database.db('push-tokens')
-})
+let db = null
+const uri = "mongodb+srv://bharat:Ravi.9700@pushtoken-dgxqj.azure.mongodb.net/test?retryWrites=true";
+const client = new MongoClient(uri, { useNewUrlParser: true });
+client.connect(err => {
+     db = client.db("push-tokens");
+    // perform actions on the collection object
+
+});
 
 module.exports = (app, io) => {
     let twitter = new Twitter({
