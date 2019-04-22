@@ -1,4 +1,10 @@
 const Twitter = require('twitter');
+const MongoClient = require('mongodb').MongoClient
+
+let db
+MongoClient.connect('mongodb+srv://bharat:Ravi.9700@pushtoken-dgxqj.azure.mongodb.net/test?retryWrites=true', (err, database) => {
+    db = database.db('push-tokens')
+})
 
 module.exports = (app, io) => {
     let twitter = new Twitter({
@@ -40,7 +46,15 @@ module.exports = (app, io) => {
         app.locals.searchTerm = term;
         stream();
     });
+    app.post('/tokens', (req, res) => {
+        console.log('logged')
+        db.collection('tokens').save(req.body, (err, result) => {
+            if (err) return console.log(err)
 
+            console.log('saved to database')
+            res.redirect('/')
+        })
+    })
     /**
      * Pauses the twitter stream.
      */
