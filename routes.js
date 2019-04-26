@@ -2,6 +2,8 @@ const Twitter = require('twitter');
 const MongoClient = require('mongodb').MongoClient
 
 
+module.exports = (app, io) => {
+    
 const uri = "mongodb+srv://bharat:Ravi.9700@pushtoken-dgxqj.azure.mongodb.net/test?retryWrites=true";
 const client = new MongoClient(uri, { useNewUrlParser: true });
 let db
@@ -11,7 +13,6 @@ client.connect(err => {
 
 });
 
-module.exports = (app, io) => {
     let twitter = new Twitter({
         consumer_key: '9MzzQgdcQWmRckmseqkXZg4uZ',
         consumer_secret: '2ABcRhCAFHxmjTOKeUrtlcmnKdM3YQmPKyGwqjxHE3X1lcKenK',
@@ -57,7 +58,7 @@ module.exports = (app, io) => {
             if (err) return console.log(err)
 
             console.log('saved to database')
-            res.redirect('/')
+        
         })
     })
     /**
