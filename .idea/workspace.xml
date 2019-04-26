@@ -27,8 +27,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/routes.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="161">
-              <caret line="7" column="23" lean-forward="true" selection-start-line="7" selection-start-column="23" selection-end-line="7" selection-end-column="23" />
+            <state relative-caret-position="253">
+              <caret line="11" column="3" lean-forward="true" selection-start-line="8" selection-end-line="11" />
             </state>
           </provider>
         </entry>
@@ -56,7 +56,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="270" />
     <option name="y" value="115" />
     <option name="width" value="1555" />
@@ -111,19 +111,19 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1555969642482</updated>
-      <workItem from="1555969644918" duration="3921000" />
+      <workItem from="1555969644918" duration="4352000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="3921000" />
+    <option name="totallyTimeSpent" value="4352000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="216" y="92" width="1244" height="680" extended-state="0" />
+    <frame x="-7" y="-7" width="1550" height="848" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Favorites" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.31317315" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24983476" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" />
@@ -154,8 +154,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/routes.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="161">
-          <caret line="7" column="23" lean-forward="true" selection-start-line="7" selection-start-column="23" selection-end-line="7" selection-end-column="23" />
+        <state relative-caret-position="253">
+          <caret line="11" column="3" lean-forward="true" selection-start-line="8" selection-end-line="11" />
         </state>
       </provider>
     </entry>

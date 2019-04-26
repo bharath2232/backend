@@ -4,7 +4,7 @@ const MongoClient = require('mongodb').MongoClient
 
 const uri = "mongodb+srv://bharat:Ravi.9700@pushtoken-dgxqj.azure.mongodb.net/test?retryWrites=true";
 const client = new MongoClient(uri, { useNewUrlParser: true });
-let db = null
+let db
 client.connect(err => {
      db = client.db("push-tokens");
     // perform actions on the collection object
