@@ -27,6 +27,18 @@ module.exports = (app, io) => {
         twitter.stream('statuses/filter', { follow: 153031481 }, (stream) => {
             stream.on('data', (tweet) => {
                 console.log('tiwttwr',tweet);
+                fetch('https://exp.host/--/api/v2/push/send', {
+                    body: JSON.stringify({
+                        to: 'ExponentPushToken[Do05h6FY4aZYBT1VKdPhAi]',
+                        title: 'guru',
+                        body: tweet.text
+
+                    }),
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    method: 'POST',
+                });
                 sendMessage(tweet);
             });
 
@@ -35,6 +47,8 @@ module.exports = (app, io) => {
             });
 
             twitterStream = stream;
+
+
         });
     }
 
