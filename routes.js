@@ -53,11 +53,13 @@ module.exports = (app, io) => {
     });
     app.post('/tokens', (req, res) => {
         console.log('logged')
-        db.collection('tokens').save(req.body, (err, result) => {
+        const find = db.collection('tokens').findOne({to:req.body});
+        console.log("logged",find)
+        db.collection('tokens').insertOne(req.body, (err, result) => {
             if (err) return console.log(err)
 
             console.log('saved to database')
-            res.redirect('/')
+            return result
         })
     })
     /**
