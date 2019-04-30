@@ -40,7 +40,6 @@ module.exports = (app, io) => {
                     },
                     method: 'POST',
                 });
-                sendMessage(tweet);
             });
 
             stream.on('error', (error) => {
