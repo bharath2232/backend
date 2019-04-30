@@ -56,15 +56,11 @@ module.exports = (app, io) => {
 
     })
     app.post('/tokens',(req,res)=>{
-        const token = new Tokens(req.body);
         const sevran =  Tokens.find({to:req.body.to}).then(result => {
             console.log('already exist',result);
             if (result.length === 0){
-                token.save().then(result => {
-                    console.log('Sucess',result);
-                    res.send(result);
-                })
-                    .catch(err => console.log('error duude', err) )
+                const token = new Tokens(req.body);
+                token.save()
             }
             res.send(result);
         })
