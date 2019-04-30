@@ -1,7 +1,9 @@
 {
   "dependencies": {
+    "@google-cloud/translate": "^3.0.1",
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
+    "google-translate": "^2.2.0",
     "mongodb": "^3.2.3",
     "mongoose": "^5.5.4",
     "node-fetch": "^2.4.1",
