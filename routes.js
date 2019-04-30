@@ -100,12 +100,6 @@ module.exports = (app, io) => {
     });
 
     //Establishes socket connection.
-    io.on("connection", socket => {
-        socketConnection = socket;
-        stream();
-        socket.on("connection", () => console.log("Client connected"));
-        socket.on("disconnect", () => console.log("Client disconnected"));
-    });
 
     /**
      * Emits data from stream.
