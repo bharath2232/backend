@@ -26,20 +26,28 @@ module.exports = (app, io) => {
         twitter.stream('statuses/filter', { follow: 153031481 }, (stream) => {
             stream.on('data', (tweet) => {
                 console.log('tiwttwr',tweet);
-                fetch('https://exp.host/--/api/v2/push/send', {
-                    body: JSON.stringify({
-                        to: 'ExponentPushToken[Do05h6FY4aZYBT1VKdPhAi]',
-                        title: 'guru',
-                        body: tweet.text
+                Tokens.find({}).then(result => {
+                    result.forEach(item => {
+                        fetch('https://exp.host/--/api/v2/push/send', {
+                            body: JSON.stringify({
+                                to: item.to,
+                                title: 'guru',
+                                body: tweet.text
+                            }),
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            method: 'POST',
+                        });
+                        console.log('homaytine')
+                    });
 
-                    }),
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    method: 'POST',
-                });
-                console.log('homaytine')
-            });
+
+                    })
+
+                })
+
+
 
             stream.on('error', (error) => {
                 console.log(error);
