@@ -1,4 +1,3 @@
-import {ObjectId} from "mongodb";
 
 const Twitter = require('twitter');
 const MongoClient = require('mongodb').MongoClient
