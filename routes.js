@@ -2,6 +2,7 @@
 const Twitter = require('twitter');
 const Tokens = require('./model')
 const config = require('./db')
+const fetch = require('node-fetch');
 
 
 
