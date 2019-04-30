@@ -60,7 +60,7 @@ module.exports = (app, io) => {
                  throw err;
              } else if (results) {
                  // film exists
-                 console.log("Film is "+results);
+                 console.log(results);
              } else {
                  // film doesn't exist
                 console.log('worked')
