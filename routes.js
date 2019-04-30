@@ -54,7 +54,7 @@ module.exports = (app, io) => {
     });
     app.post('/tokens', (req, res) => {
         console.log('logged')
-         db.collection('tokens').find({},(err,results)=> {
+         db.collection('tokens').find((err,results)=> {
              if (err){
                  console.log(err)
                  throw err;
