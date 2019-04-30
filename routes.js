@@ -15,7 +15,6 @@ module.exports = (app, io) => {
         access_token_secret: 'mAgSPSp1xKd1ed5F5o5LXVPRnb7HTuHyHOMkJZ1lUUrBY'
     });
 
-    let socketConnection;
     let twitterStream;
 
     app.locals.searchTerm = 'JavaScript'; //Default search term for twitter stream.
@@ -46,7 +45,6 @@ module.exports = (app, io) => {
                 console.log(error);
             });
 
-            twitterStream = stream;
 
 
         });
@@ -112,10 +110,4 @@ module.exports = (app, io) => {
      * Emits data from stream.
      * @param {String} msg
      */
-    const sendMessage = (msg) => {
-        if (msg.text.includes('RT')) {
-            return;
-        }
-        io.emit("tweets", msg);
-    }
 };
