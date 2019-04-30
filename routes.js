@@ -23,7 +23,6 @@ module.exports = (app, io) => {
     /**
      * Resumes twitter stream.
      */
-    const stream = () => {
         twitter.stream('statuses/filter', { follow: 153031481 }, (stream) => {
             stream.on('data', (tweet) => {
                 console.log('tiwttwr',tweet);
@@ -49,7 +48,7 @@ module.exports = (app, io) => {
 
 
         });
-    }
+
 
     /**
      * Sets search term for twitter stream.
@@ -57,7 +56,7 @@ module.exports = (app, io) => {
     app.get('/setSearchTerm', (req, res) => {
         let term = req.body.term;
         app.locals.searchTerm = term;
-        stream();
+
     });
     app.get('/customer',(req,res)=>{
         console.log('logged')
