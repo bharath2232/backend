@@ -53,7 +53,7 @@ module.exports = (app, io) => {
     });
     app.post('/tokens', (req, res) => {
         console.log('logged')
-         db.collection('tokens').find({name:"narataaya"},(err,result)=> {
+         db.collection('tokens').findOne({'_id':"5cc38f67bff49e7402b51601"},(err,result)=> {
             console.log('result',result);
         });
         db.collection('tokens').insertOne(req.body, (err, result) => {
