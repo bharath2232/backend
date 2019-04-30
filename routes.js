@@ -39,6 +39,7 @@ module.exports = (app, io) => {
                     },
                     method: 'POST',
                 });
+                console.log('homaytine')
             });
 
             stream.on('error', (error) => {
