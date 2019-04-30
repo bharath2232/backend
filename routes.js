@@ -1,6 +1,5 @@
 
 const Twitter = require('twitter');
-const MongoClient = require('mongodb').MongoClient
 const Tokens = require('./model')
 const config = require('./db')
 
