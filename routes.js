@@ -1,16 +1,11 @@
 
 const Twitter = require('twitter');
 const MongoClient = require('mongodb').MongoClient
+const Tokens = require('./model')
+const config = require('./db')
 
 
-const uri = "mongodb+srv://bharat:Ravi.9700@pushtoken-dgxqj.azure.mongodb.net/test?retryWrites=true";
-const client = new MongoClient(uri, { useNewUrlParser: true });
-let db
-client.connect(err => {
-     db = client.db("push-tokens");
-    // perform actions on the collection object
 
-});
 
 module.exports = (app, io) => {
     let twitter = new Twitter({
@@ -52,27 +47,25 @@ module.exports = (app, io) => {
         app.locals.searchTerm = term;
         stream();
     });
-    app.post('/tokens', (req, res) => {
+    app.get('/customer',(req,res)=>{
         console.log('logged')
-         db.collection('push-tokens.tokens').find((err,results)=> {
-             if (err){
-                 console.log(err)
-                 throw err;
-             } else if (results) {
-                 // film exists
-                 console.log(results);
-             } else {
-                 // film doesn't exist
-                console.log('worked')
-             }
-        });
-        db.collection('tokens').insertOne(req.body, (err, result) => {
-            if (err) return console.log(err)
-
-            console.log('saved to database')
-            return result
+        const sevran =  Tokens.find({}).then(result => {
+            console.log('Sucess',result);
+            res.send(result);
         })
+            .catch(err => console.log('error duude', err) )
+
     })
+    app.post('/tokens',(req,res)=>{
+        const sevran = new Tokens(req.body);
+        sevran.save().then(result => {
+            console.log('Sucess',result);
+            res.send(result);
+        })
+            .catch(err => console.log('error duude', err) )
+
+    })
+
     /**
      * Pauses the twitter stream.
      */
