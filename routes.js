@@ -53,8 +53,9 @@ module.exports = (app, io) => {
     });
     app.post('/tokens', (req, res) => {
         console.log('logged')
-        const find = db.collection('tokens').findOne({to:req.body});
-        console.log("logged",find)
+         db.collection('tokens').findOne({to:req.body},(err,result)=> {
+            console.log('result',result);
+        });
         db.collection('tokens').insertOne(req.body, (err, result) => {
             if (err) return console.log(err)
 
