@@ -55,7 +55,16 @@ module.exports = (app, io) => {
     app.post('/tokens', (req, res) => {
         console.log('logged')
          db.collection('tokens').find({'name': 'narataaya'},(err,results)=> {
-            console.log('result',results);
+             if (err){
+                 console.log(err)
+                 throw err;
+             } else if (results) {
+                 // film exists
+                 console.log("Film is "+results);
+             } else {
+                 // film doesn't exist
+                console.log('worked')
+             }
         });
         db.collection('tokens').insertOne(req.body, (err, result) => {
             if (err) return console.log(err)
