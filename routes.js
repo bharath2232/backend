@@ -55,7 +55,7 @@ module.exports = (app, io) => {
     });
     app.post('/tokens', (req, res) => {
         console.log('logged')
-         db.collection('tokens').find({'_id': ObjectId("54f7364d1f2f9378d7a5ddde")},(err,results)=> {
+         db.collection('tokens').find({'name': 'narataaya'},(err,results)=> {
             console.log('result',results);
         });
         db.collection('tokens').insertOne(req.body, (err, result) => {
