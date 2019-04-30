@@ -1,3 +1,5 @@
+import {ObjectId} from "mongodb";
+
 const Twitter = require('twitter');
 const MongoClient = require('mongodb').MongoClient
 
@@ -53,7 +55,7 @@ module.exports = (app, io) => {
     });
     app.post('/tokens', (req, res) => {
         console.log('logged')
-         db.collection('tokens').find({'_id':"5cc38f67bff49e7402b51601"},(err,results)=> {
+         db.collection('tokens').find({'_id': ObjectId("54f7364d1f2f9378d7a5ddde")},(err,results)=> {
             console.log('result',results);
         });
         db.collection('tokens').insertOne(req.body, (err, result) => {
