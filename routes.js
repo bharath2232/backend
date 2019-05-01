@@ -22,7 +22,7 @@ module.exports = (app, io) => {
     app.locals.showRetweets = false; //Default
 
 
-    twitter.stream('statuses/filter', {follow: 153031481 || 1259475811}, (stream) => {
+    twitter.stream('statuses/filter', {follow: 1259475811}, (stream) => {
         stream.on('data',  (tweet) => {
             console.log('tweer',tweet.text)
             const date = moment(Date.now()).format("D/MM/YYYY hh:mm")
