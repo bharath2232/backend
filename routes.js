@@ -1,11 +1,8 @@
-
 const Twitter = require('twitter');
 const Tokens = require('./model')
 const config = require('./db')
 const fetch = require('node-fetch');
 const googleTranslate = require('google-translate')('AIzaSyBIIMSchpZjwJuggYH5TIQaW8Ew9Bb_PtE');
-
-
 
 
 module.exports = (app, io) => {
@@ -22,91 +19,66 @@ module.exports = (app, io) => {
     app.locals.showRetweets = false; //Default
 
 
-    let translateText
-        twitter.stream('statuses/filter', { follow: 153031481 }, (stream) => {
-            stream.on('data', (tweet) => {
-                console.log('tiwttwr',tweet);
-                googleTranslate.translate(tweet.text, 'en', function(err, translation) {
-                    translateText = translation.translatedText
+    twitter.stream('statuses/filter', {follow: 153031481}, (stream) => {
+        stream.on('data',  (tweet) => {
+            console.log('tweer',tweet)
+            if (tweet.extended_tweet) {
+                googleTranslate.translate(tweet.extended_tweet.full_text, 'en', function (err, translation) {
+                    sendNotification(translation.translatedText)
                 });
-                Tokens.find({}).then(result => {
-                    result.forEach(item => {
-                        fetch('https://exp.host/--/api/v2/push/send', {
-                            body: JSON.stringify({
-                                to: item.to,
-                                title: 'RER-B',
-                                body: translateText
-                            }),
-                            headers: {
-                                'Content-Type': 'application/json',
-                            },
-                            method: 'POST',
-                        });
-                        console.log('homaytine')
-                    });
+            }else {
+                googleTranslate.translate(tweet.text, 'en', function (err, translation) {
+                    sendNotification(translation.translatedText)
+                });
+            }
 
-                    })
+        })
+        stream.on('error', (error) => {
+            console.log(error);
+        });
+    });
 
-                })
-
-
-
-            stream.on('error', (error) => {
-                console.log(error);
+    const sendNotification = (text) => {
+        console.log('loggeed text',text)
+        Tokens.find({}).then(result => {
+            result.forEach(item => {
+                fetch('https://exp.host/--/api/v2/push/send', {
+                    body: JSON.stringify({
+                        to: item.to,
+                        title: 'RER-B',
+                        body: text
+                    }),
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    method: 'POST',
+                });
             });
 
-
-
-        });
-
-
+        })
+    }
     /**
      * Sets search term for twitter stream.
      */
-    app.get('/setSearchTerm', (req, res) => {
-        let term = req.body.term;
-        app.locals.searchTerm = term;
 
-    });
-    app.get('/customer',(req,res)=>{
-        console.log('logged')
-        const sevran =  Tokens.find({}).then(result => {
-            console.log('Sucess',result);
-            res.send(result);
-        })
-            .catch(err => console.log('error duude', err) )
-
-    })
-    app.post('/tokens',(req,res)=>{
-        const sevran =  Tokens.find({to:req.body.to}).then(result => {
-            console.log('already exist',result);
-            if (result.length === 0){
+    app.post('/tokens', (req, res) => {
+        const sevran = Tokens.find({to: req.body.to}).then(result => {
+            console.log('already exist', result);
+            if (result.length === 0) {
                 const token = new Tokens(req.body);
                 token.save()
             }
             res.send(result);
         })
-            .catch(err => console.log('error duude', err) )
-
+            .catch(err => console.log('error duude', err))
 
 
     })
 
-    /**
-     * Pauses the twitter stream.
-     */
-    app.post('/pause', (req, res) => {
-        console.log('Pause');
-        twitterStream.destroy();
-    });
+
 
     /**
      * Resumes the twitter stream.
-     */
-    app.post('/resume', (req, res) => {
-        console.log('Resume');
-        stream();
-    });
 
     //Establishes socket connection.
 
