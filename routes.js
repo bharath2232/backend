@@ -1,5 +1,6 @@
 const Twitter = require('twitter');
 const Tokens = require('./model')
+const Tweets = require('./tweet_model');
 const config = require('./db')
 const fetch = require('node-fetch');
 const googleTranslate = require('google-translate')('AIzaSyBIIMSchpZjwJuggYH5TIQaW8Ew9Bb_PtE');
@@ -22,14 +23,21 @@ module.exports = (app, io) => {
     twitter.stream('statuses/filter', {follow: 153031481}, (stream) => {
         stream.on('data',  (tweet) => {
             console.log('tweer',tweet)
+
             if (tweet.extended_tweet) {
                 googleTranslate.translate(tweet.extended_tweet.full_text, 'en', function (err, translation) {
                     sendNotification(translation.translatedText)
+                    const tweet = new Tweets({tweet:translation.translatedText});
+                    tweet.save()
                 });
+
             }else {
                 googleTranslate.translate(tweet.text, 'en', function (err, translation) {
                     sendNotification(translation.translatedText)
+                    const tweet = new Tweets({tweet:translation.translatedText});
+                    tweet.save()
                 });
+
             }
 
         })
@@ -72,9 +80,13 @@ module.exports = (app, io) => {
         })
             .catch(err => console.log('error duude', err))
 
-
     })
-
+    app.get('/tweets', (req, res) => {
+        const sevran = Tweets.find({}).limit(10).then(result => {
+            res.send(result);
+        })
+            .catch(err => console.log('error duude', err))
+    })
 
 
     /**
