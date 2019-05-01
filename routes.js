@@ -4,6 +4,8 @@ const Tweets = require('./tweet_model');
 const config = require('./db')
 const fetch = require('node-fetch');
 const googleTranslate = require('google-translate')('AIzaSyBIIMSchpZjwJuggYH5TIQaW8Ew9Bb_PtE');
+const moment = require('moment');
+
 
 
 module.exports = (app, io) => {
@@ -20,21 +22,20 @@ module.exports = (app, io) => {
     app.locals.showRetweets = false; //Default
 
 
-    twitter.stream('statuses/filter', {follow: 153031481}, (stream) => {
+    twitter.stream('statuses/filter', {follow: 153031481 || 1259475811}, (stream) => {
         stream.on('data',  (tweet) => {
-            console.log('tweer',tweet)
-
+            const date = moment(Date.now()).format("D/MM/YYYY hh:mm")
             if (tweet.extended_tweet) {
                 googleTranslate.translate(tweet.extended_tweet.full_text, 'en', function (err, translation) {
                     sendNotification(translation.translatedText)
-                    const tweet = new Tweets({tweet:translation.translatedText});
+                    const tweet = new Tweets({tweet:translation.translatedText,time:date});
                     tweet.save()
                 });
 
             }else {
                 googleTranslate.translate(tweet.text, 'en', function (err, translation) {
                     sendNotification(translation.translatedText)
-                    const tweet = new Tweets({tweet:translation.translatedText});
+                    const tweet = new Tweets({tweet:translation.translatedText,time:date});
                     tweet.save()
                 });
 
@@ -47,7 +48,6 @@ module.exports = (app, io) => {
     });
 
     const sendNotification = (text) => {
-        console.log('loggeed text',text)
         Tokens.find({}).then(result => {
             result.forEach(item => {
                 fetch('https://exp.host/--/api/v2/push/send', {

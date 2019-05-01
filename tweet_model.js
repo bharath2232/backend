@@ -8,13 +8,9 @@ const tweetsSchema = new Schema({
     tweet : {
         type:String
     },
-    to : {
+    time : {
         type:String
     },
-    device:{
-        type:String
-
-    }
 })
 
 const Tweets = mongoose.model('tweets',tweetsSchema);
