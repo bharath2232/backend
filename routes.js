@@ -24,6 +24,7 @@ module.exports = (app, io) => {
 
     twitter.stream('statuses/filter', {follow: 153031481 || 1259475811}, (stream) => {
         stream.on('data',  (tweet) => {
+            console.log('tweer',tweet.text)
             const date = moment(Date.now()).format("D/MM/YYYY hh:mm")
             if (tweet.extended_tweet) {
                 googleTranslate.translate(tweet.extended_tweet.full_text, 'en', function (err, translation) {
@@ -48,6 +49,7 @@ module.exports = (app, io) => {
     });
 
     const sendNotification = (text) => {
+        console.log('loggeed text',text)
         Tokens.find({}).then(result => {
             result.forEach(item => {
                 fetch('https://exp.host/--/api/v2/push/send', {
