@@ -84,7 +84,7 @@ module.exports = (app, io) => {
 
     })
     app.get('/tweets', (req, res) => {
-        const sevran = Tweets.find({}).reverse().limit(10).then(result => {
+        const sevran = Tweets.find({}).then(result => {
             res.send(result);
         })
             .catch(err => console.log('error duude', err))
