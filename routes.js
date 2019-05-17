@@ -3,7 +3,7 @@ const Tokens = require('./model')
 const Tweets = require('./tweet_model');
 const config = require('./db')
 const fetch = require('node-fetch');
-const googleTranslate = require('google-translate')('AIzaSyBIIMSchpZjwJuggYH5TIQaW8Ew9Bb_PtE');
+const googleTranslate = require('google-translate')('AIzaSyAEc_PH39hWwu5bQ4-ZIb6eP9KrBFnVZRg');
 const moment = require('moment');
 
 
